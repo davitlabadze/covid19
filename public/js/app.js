@@ -21904,9 +21904,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  src: "img/user.png",
-  alt: "logo",
-  "class": "w-full h-auto shadow-xl"
+  src: "https://img.icons8.com/external-others-phat-plus/128/000000/external-corona-virus-transmission-color-line-others-phat-plus.png"
 };
 function render(_ctx, _cache) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("img", _hoisted_1);

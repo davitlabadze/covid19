@@ -1,3 +1,3 @@
 <template>
-    <img src="img/user.png" alt="logo" class="w-full h-auto shadow-xl">
+  <img src="https://img.icons8.com/external-others-phat-plus/128/000000/external-corona-virus-transmission-color-line-others-phat-plus.png"/>
 </template>
