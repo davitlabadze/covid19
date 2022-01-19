@@ -10,9 +10,6 @@
 ## About app
     Covid 19 is an app where you can see the number of people infected with Covid, recovered and deceased worldwide You can also get and save country-specific statistics in your account
 
-
-<a name="iar"></a>
-
 ## App looks like 
 !['screenshot'](appscreen/app.png)
 
