@@ -42,7 +42,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function visitedCountry()
+    public function Country()
     {
         return $this->belongsToMany('App\Models\Country', 'visited_countries','user_id','country_id');
     }

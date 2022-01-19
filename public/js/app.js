@@ -21866,23 +21866,23 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      SelectedVisitedCountry: '',
-      visitedCountries: [],
+      SelectedCountry: '',
+      Countries: [],
       statistics: [],
       choicecountry: []
     };
   },
   methods: {
-    VisitedCountrySelected: function VisitedCountrySelected(_ref) {// console.log({id, text})
+    CountrySelected: function CountrySelected(_ref) {// console.log({id, text})
 
       var id = _ref.id,
           text = _ref.text;
     },
-    getVisitedCountry: function getVisitedCountry() {
+    getCountry: function getCountry() {
       var _this = this;
 
       axios__WEBPACK_IMPORTED_MODULE_3___default().get('/api/countries/visited').then(function (response) {
-        _this.visitedCountries = response.data;
+        _this.Countries = response.data;
       });
     },
     selectCountry: function selectCountry() {
@@ -21890,17 +21890,16 @@ __webpack_require__.r(__webpack_exports__);
 
       axios__WEBPACK_IMPORTED_MODULE_3___default().get('https://disease.sh/v3/covid-19/countries/geo').then(function (response) {
         _this2.choicecountry = response.data;
-        console.log(_this2.choicecountry.countryInfo.flag);
       });
     },
-    addVisitedCountry: function addVisitedCountry() {
+    addCountry: function addCountry() {
       var _this3 = this;
 
-      if (this.SelectedVisitedCountry !== '') {
+      if (this.SelectedCountry !== '') {
         axios__WEBPACK_IMPORTED_MODULE_3___default().post('/api/add-visited-country', {
-          countryID: this.SelectedVisitedCountry
+          countryID: this.SelectedCountry
         }).then(function (response) {
-          _this3.getVisitedCountry();
+          _this3.getCountry();
         })["catch"](function (error) {
           console.log(error);
         });
@@ -21913,16 +21912,15 @@ __webpack_require__.r(__webpack_exports__);
 
       axios__WEBPACK_IMPORTED_MODULE_3___default().get('https://disease.sh/v3/covid-19/all').then(function (response) {
         _this4.statistics = response.data;
-        console.log(_this4.statistics.todayCases);
       });
     },
-    removeVisitedCountry: function removeVisitedCountry(countryID) {
+    removeCountry: function removeCountry() {
       var _this5 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_3___default()["delete"]('/api/remove-visited-country/' + countryID)["catch"](function (error) {
+      axios__WEBPACK_IMPORTED_MODULE_3___default()["delete"]('https://disease.sh/v3/covid-19/countries/geo')["catch"](function (error) {
         console.log(error);
       }).then(function () {
-        _this5.getVisitedCountry();
+        _this5.selectCountry();
       });
     },
     initMap: function initMap() {
@@ -21931,28 +21929,9 @@ __webpack_require__.r(__webpack_exports__);
         projection: 'mercator',
         fills: {
           defaultFill: "#ABDDA4",
-          authorHasTraveledTo: "#fa0fa0",
           georgia: "#ff0000"
         },
         data: {
-          USA: {
-            fillKey: "authorHasTraveledTo"
-          },
-          JPN: {
-            fillKey: "authorHasTraveledTo"
-          },
-          ITA: {
-            fillKey: "authorHasTraveledTo"
-          },
-          CRI: {
-            fillKey: "authorHasTraveledTo"
-          },
-          KOR: {
-            fillKey: "authorHasTraveledTo"
-          },
-          DEU: {
-            fillKey: "authorHasTraveledTo"
-          },
           GEO: {
             fillKey: "georgia"
           }
@@ -21963,13 +21942,13 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this6 = this;
 
-    this.getVisitedCountry();
+    this.getCountry();
     this.getStatistics();
     this.selectCountry();
     setTimeout(function () {
       _this6.initMap();
     }, 1000);
-    this.removeVisitedCountry();
+    this.removeCountry();
   }
 });
 
@@ -23373,22 +23352,64 @@ var _hoisted_21 = {
 var _hoisted_22 = {
   "class": "flex"
 };
+var _hoisted_23 = {
+  "class": "items-center justify-between w-full mt-10 mb-5 border border-gray-800 rounded-md"
+};
+var _hoisted_24 = {
+  "class": "flex justify-between mt-5 ml-24 w-96"
+};
 
-var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  id: "content"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
-  src: "{{ this.choicecountry.countryInfo.flag }}",
-  alt: "bla"
-}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+  "class": "w-8",
   src: "https://disease.sh/assets/img/flags/ge.png",
   alt: "bla"
-})], -1
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_26 = {
+  "class": "ml-6 text-xl"
+};
+
+var _hoisted_27 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+  "class": "w-6 ml-10",
+  src: "https://img.icons8.com/fluency/128/000000/filled-trash.png"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_28 = [_hoisted_27];
+var _hoisted_29 = {
+  "class": "mb-5 ml-4"
+};
+var _hoisted_30 = {
+  "class": "flex mt-10 font-black text-center"
+};
+var _hoisted_31 = {
+  "class": "h-20 p-2 ml-2 text-yellow-800 bg-yellow-100 border border-gray-800 rounded w-44 1/3"
+};
+
+var _hoisted_32 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", null, "Today Cases", -1
+/* HOISTED */
+);
+
+var _hoisted_33 = {
+  "class": "h-20 p-2 ml-2 text-red-800 bg-red-100 border border-gray-800 rounded w-44 1/3"
+};
+
+var _hoisted_34 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", null, "Today Deaths", -1
+/* HOISTED */
+);
+
+var _hoisted_35 = {
+  "class": "h-20 p-2 ml-2 text-green-800 bg-green-100 border border-gray-800 rounded w-44 1/3"
+};
+
+var _hoisted_36 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", null, "Today Recovered", -1
 /* HOISTED */
 );
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _this = this;
-
   var _component_Head = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Head");
 
   var _component_Select2 = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Select2");
@@ -23407,9 +23428,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       /* TEXT */
       )])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [_hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Select2, {
         "class": "w-96",
-        modelValue: $data.SelectedVisitedCountry,
+        modelValue: $data.SelectedCountry,
         "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
-          return $data.SelectedVisitedCountry = $event;
+          return $data.SelectedCountry = $event;
         }),
         settings: {
           width: '100%',
@@ -23419,19 +23440,31 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           }
         },
         onSelect: _cache[1] || (_cache[1] = function ($event) {
-          return $options.VisitedCountrySelected($event);
+          return $options.CountrySelected($event);
         })
       }, null, 8
       /* PROPS */
       , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
         href: "javascript:void(0);",
         onClick: _cache[2] || (_cache[2] = function () {
-          return $options.addVisitedCountry && $options.addVisitedCountry.apply($options, arguments);
+          return _ctx.addVisitedCountry && _ctx.addVisitedCountry.apply(_ctx, arguments);
         }),
         "class": "px-3 ml-3 text-xl font-black text-white bg-green-400 rounded-md hover:bg-green-500"
-      }, "Add")])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_this.choicecountry.country) + " ", 1
+      }, "Add")])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_24, [_hoisted_25, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_26, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.choicecountry.country), 1
       /* TEXT */
-      ), _hoisted_23])])])])])])])];
+      ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+        href: "javascript:void(0)",
+        "class": "flex-1-0",
+        onClick: _cache[3] || (_cache[3] = function ($event) {
+          return $options.removeCountry();
+        })
+      }, _hoisted_28)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_29, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_31, [_hoisted_32, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.choicecountry.todayCases), 1
+      /* TEXT */
+      )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_33, [_hoisted_34, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.choicecountry.todayDeaths), 1
+      /* TEXT */
+      )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_35, [_hoisted_36, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.choicecountry.todayRecovered), 1
+      /* TEXT */
+      )])])])])])])])])])])])];
     }),
     _: 1
     /* STABLE */

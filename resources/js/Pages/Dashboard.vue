@@ -50,7 +50,7 @@
                                     <div class="flex">
                                         <Select2
                                         class=" w-96"
-                                        v-model="SelectedVisitedCountry"
+                                        v-model="SelectedCountry"
                                         :settings="{
                                             width:'100%',
                                             ajax: {
@@ -59,7 +59,7 @@
                                             },
                                         }"
 
-                                       @select="VisitedCountrySelected($event)"
+                                       @select="CountrySelected($event)"
                                         />
                                         <a href="javascript:void(0);"
                                         @click="addVisitedCountry"
@@ -67,16 +67,35 @@
                                     </div>
                                 </div>
                                 <div>
-                                    {{ this.choicecountry.country }}
-
-                                    <div id="content">
-                                        <img src="{{ this.choicecountry.countryInfo.flag }}" alt="bla" />
-                                        <img src="https://disease.sh/assets/img/flags/ge.png" alt="bla" />
-
+                                    <div class="items-center justify-between w-full mt-10 mb-5 border border-gray-800 rounded-md ">
+                                        <div class="flex justify-between mt-5 ml-24 w-96">
+                                            <img  class="w-8" src="https://disease.sh/assets/img/flags/ge.png" alt="bla" />
+                                            <h1 class="ml-6 text-xl">{{ choicecountry.country }}</h1>
+                                            <a href="javascript:void(0)"
+                                                class="flex-1-0"
+                                                @click="removeCountry()">
+                                                <img class="w-6 ml-10 " src="https://img.icons8.com/fluency/128/000000/filled-trash.png"/>
+                                            </a>
+                                        </div>
+                                       <div class="mb-5 ml-4">
+                                            <div class="flex mt-10 font-black text-center">
+                                            <div class="h-20 p-2 ml-2 text-yellow-800 bg-yellow-100 border border-gray-800 rounded w-44 1/3">
+                                                <h1>Today Cases</h1>
+                                                <h2>{{choicecountry.todayCases }}</h2>
+                                            </div>
+                                            <div class="h-20 p-2 ml-2 text-red-800 bg-red-100 border border-gray-800 rounded w-44 1/3">
+                                                <h1>Today Deaths</h1>
+                                                <h2>{{choicecountry.todayDeaths }}</h2>
+                                            </div>
+                                            <div class="h-20 p-2 ml-2 text-green-800 bg-green-100 border border-gray-800 rounded w-44 1/3">
+                                                <h1>Today Recovered</h1>
+                                                <h2>{{choicecountry.todayRecovered }}</h2>
+                                            </div>
+                                        </div>
+                                       </div>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -102,38 +121,37 @@ export default {
     },
     data() {
         return {
-            SelectedVisitedCountry: '',
-            visitedCountries: [],
+            SelectedCountry: '',
+            Countries: [],
             statistics: [],
             choicecountry: [],
 
         }
     },
     methods: {
-        VisitedCountrySelected({id, text}){
+        CountrySelected({id, text}){
             // console.log({id, text})
         },
 
-         getVisitedCountry(){
+         getCountry(){
             axios.get('/api/countries/visited')
             .then((response) => {
-                this.visitedCountries = response.data;
+                this.Countries = response.data;
             });
         },
         selectCountry(){
             axios.get('https://disease.sh/v3/covid-19/countries/geo')
             .then((response) => {
                 this.choicecountry = response.data;
-                console.log(this.choicecountry.countryInfo.flag);
             });
         },
-        addVisitedCountry(){
+        addCountry(){
 
-            if (this.SelectedVisitedCountry !== '') {
+            if (this.SelectedCountry !== '') {
                 axios.post('/api/add-visited-country',{
-                    countryID: this.SelectedVisitedCountry
+                    countryID: this.SelectedCountry
                 }).then((response) => {
-                    this.getVisitedCountry();
+                    this.getCountry();
                 }).catch(function(error){
                     console.log(error)
                 })
@@ -145,15 +163,14 @@ export default {
             axios.get('https://disease.sh/v3/covid-19/all')
             .then((response) => {
                 this.statistics = response.data;
-                console.log(this.statistics.todayCases);
             });
         },
-        removeVisitedCountry(countryID){
-            axios.delete('/api/remove-visited-country/'+countryID)
+        removeCountry(){
+            axios.delete('https://disease.sh/v3/covid-19/countries/geo')
             .catch(function(error){
                 console.log(error);
             }).then(() =>{
-                this.getVisitedCountry();
+                this.selectCountry();
             });
         },
         initMap(){
@@ -162,16 +179,11 @@ export default {
             projection: 'mercator',
                 fills: {
                     defaultFill: "#ABDDA4",
-                    authorHasTraveledTo: "#fa0fa0",
+
                     georgia:"#ff0000",
                 },
                 data: {
-                    USA: { fillKey: "authorHasTraveledTo" },
-                    JPN: { fillKey: "authorHasTraveledTo" },
-                    ITA: { fillKey: "authorHasTraveledTo" },
-                    CRI: { fillKey: "authorHasTraveledTo" },
-                    KOR: { fillKey: "authorHasTraveledTo" },
-                    DEU: { fillKey: "authorHasTraveledTo" },
+
                     GEO: { fillKey: "georgia"},
                 }
             });
@@ -180,13 +192,13 @@ export default {
 
 
     created(){
-        this.getVisitedCountry();
+        this.getCountry();
         this.getStatistics();
         this.selectCountry();
         setTimeout(()=> {
             this.initMap();
         }, 1000);
-        this.removeVisitedCountry();
+        this.removeCountry();
 
 
     }
