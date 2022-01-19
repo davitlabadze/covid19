@@ -6,6 +6,7 @@
 *  [ Resources](#resources)
 
 <a name="about"></a>
+
 ## About app
     Covid 19 is an app where you can see the number of people infected with Covid, recovered and deceased worldwide You can also get and save country-specific statistics in your account
 
@@ -27,6 +28,8 @@
 6.  Run the command `php artisan key:generate`
 7.  Run the command `php artisan serve`
 
+
+<a name="resources"></a>
 
 ## Resurces
 *  [ API ](https://disease.sh/)
