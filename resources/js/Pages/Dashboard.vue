@@ -67,10 +67,10 @@
                                     </div>
                                 </div>
                                 <div>
-                                    {{ this.visitedCountries.country }}
+                                    {{ selectCountry.country }}
 
                                     <div id="content">
-                                        <img src="{{ this.visitedCountries.countryInfo.flag }}" alt="bla" />
+                                        <img src="{{ visitedCountries.countryInfo.flag }}" alt="bla" />
                                         <img src="https://disease.sh/assets/img/flags/ge.png" alt="bla" />
 
                                     </div>
@@ -112,7 +112,14 @@ export default {
         VisitedCountrySelected({id, text}){
             // console.log({id, text})
         },
-        getVisitedCountry(){
+
+         getVisitedCountry(){
+            axios.get('/api/countries/visited')
+            .then((response) => {
+                this.visitedCountries = response.data;
+            });
+        },
+        selectCountry(){
             axios.get('https://disease.sh/v3/covid-19/countries/geo')
             .then((response) => {
                 this.visitedCountries = response.data;
