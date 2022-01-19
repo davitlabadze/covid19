@@ -21868,7 +21868,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       SelectedVisitedCountry: '',
       visitedCountries: [],
-      statistics: []
+      statistics: [],
+      choicecountry: []
     };
   },
   methods: {
@@ -21888,8 +21889,8 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_3___default().get('https://disease.sh/v3/covid-19/countries/geo').then(function (response) {
-        _this2.visitedCountries = response.data;
-        console.log(_this2.visitedCountries.countryInfo.flag);
+        _this2.choicecountry = response.data;
+        console.log(_this2.choicecountry.countryInfo.flag);
       });
     },
     addVisitedCountry: function addVisitedCountry() {
@@ -21964,6 +21965,7 @@ __webpack_require__.r(__webpack_exports__);
 
     this.getVisitedCountry();
     this.getStatistics();
+    this.selectCountry();
     setTimeout(function () {
       _this6.initMap();
     }, 1000);
@@ -23375,7 +23377,7 @@ var _hoisted_22 = {
 var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   id: "content"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
-  src: "{{ visitedCountries.countryInfo.flag }}",
+  src: "{{ this.choicecountry.countryInfo.flag }}",
   alt: "bla"
 }), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
   src: "https://disease.sh/assets/img/flags/ge.png",
@@ -23385,6 +23387,8 @@ var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 );
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _this = this;
+
   var _component_Head = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Head");
 
   var _component_Select2 = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Select2");
@@ -23425,7 +23429,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           return $options.addVisitedCountry && $options.addVisitedCountry.apply($options, arguments);
         }),
         "class": "px-3 ml-3 text-xl font-black text-white bg-green-400 rounded-md hover:bg-green-500"
-      }, "Add")])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.selectCountry.country) + " ", 1
+      }, "Add")])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_this.choicecountry.country) + " ", 1
       /* TEXT */
       ), _hoisted_23])])])])])])])];
     }),

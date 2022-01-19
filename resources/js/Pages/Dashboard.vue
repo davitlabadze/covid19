@@ -67,10 +67,10 @@
                                     </div>
                                 </div>
                                 <div>
-                                    {{ selectCountry.country }}
+                                    {{ this.choicecountry.country }}
 
                                     <div id="content">
-                                        <img src="{{ visitedCountries.countryInfo.flag }}" alt="bla" />
+                                        <img src="{{ this.choicecountry.countryInfo.flag }}" alt="bla" />
                                         <img src="https://disease.sh/assets/img/flags/ge.png" alt="bla" />
 
                                     </div>
@@ -105,6 +105,7 @@ export default {
             SelectedVisitedCountry: '',
             visitedCountries: [],
             statistics: [],
+            choicecountry: [],
 
         }
     },
@@ -122,8 +123,8 @@ export default {
         selectCountry(){
             axios.get('https://disease.sh/v3/covid-19/countries/geo')
             .then((response) => {
-                this.visitedCountries = response.data;
-                console.log(this.visitedCountries.countryInfo.flag);
+                this.choicecountry = response.data;
+                console.log(this.choicecountry.countryInfo.flag);
             });
         },
         addVisitedCountry(){
@@ -181,6 +182,7 @@ export default {
     created(){
         this.getVisitedCountry();
         this.getStatistics();
+        this.selectCountry();
         setTimeout(()=> {
             this.initMap();
         }, 1000);
