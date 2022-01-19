@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CountryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +18,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::get('/countries/list',[CountryController::class,'list'])->middleware('auth:sanctum');
+Route::get('/countries/visited',[CountryController::class,'visitedCounty'])->middleware('auth:sanctum');
+
+Route::post('/add-visited-country',[CountryController::class,'addVisitedCountry'])->middleware('auth:sanctum');
+
+
